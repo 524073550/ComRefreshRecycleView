@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.zhuke.comrefreshrecycleview.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
+
+    <com.zhuke.comrefreshrecycleview.test.XRefreshRecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>

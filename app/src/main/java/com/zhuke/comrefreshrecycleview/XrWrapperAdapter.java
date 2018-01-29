@@ -1,6 +1,5 @@
 package com.zhuke.comrefreshrecycleview;
 
-import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,13 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
-
 /**
  * Created by 15653 on 2018/1/23.
  */
 
-public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class XrWrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int TYPE_NORMAL = 1;
     private final int TYPE_FOOT = 2;
     private final int TYPE_HEAD = 3;
@@ -29,20 +26,15 @@ public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolde
     // 加载到底
     public final int LOADING_END = 3;
     private RecyclerView.Adapter mAdapter;
-    View mHeadView;
-    public LoadMoreWrapper(RecyclerView.Adapter adapter,View head) {
+    public XrWrapperAdapter(RecyclerView.Adapter adapter) {
         this.mAdapter = adapter;
-        this.mHeadView = head;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_FOOT) {
             View footLayout = LayoutInflater.from(parent.getContext()).inflate(R.layout.normal_foot, parent, false);
-            return new LoadMoreWrapper.FootHolder(footLayout);
-        } else if (viewType == TYPE_HEAD) {
-            View head = LayoutInflater.from(parent.getContext()).inflate(R.layout.normal_head, parent, false);
-            return new LoadMoreWrapper.HeadHolder(mHeadView);
+            return new XrWrapperAdapter.FootHolder(footLayout);
         } else {
             return mAdapter.onCreateViewHolder(parent, viewType);
         }
@@ -52,7 +44,7 @@ public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int itemViewType = getItemViewType(position);
         if (itemViewType == TYPE_FOOT) {
-            LoadMoreWrapper.FootHolder footHolder = (LoadMoreWrapper.FootHolder) holder;
+            XrWrapperAdapter.FootHolder footHolder = (XrWrapperAdapter.FootHolder) holder;
             switch (loadState) {
                 case LOADING: // 正在加载
                     footHolder.pbLoading.setVisibility(View.VISIBLE);
@@ -74,28 +66,23 @@ public class LoadMoreWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 default:
                     break;
             }
-        } else if (itemViewType == TYPE_HEAD) {
-            HeadHolder headHolder = (HeadHolder) holder;
         } else {
-            mAdapter.onBindViewHolder(holder, position-1);
+            mAdapter.onBindViewHolder(holder, position);
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        int itemCount = mAdapter.getItemCount();
-        int normalCount = position - 1;
-        if (position == 0) {
-            return TYPE_HEAD;
-        } else if (normalCount < itemCount){
-            return mAdapter.getItemViewType(normalCount);
+        if (position == mAdapter.getItemCount()-1) {
+            return TYPE_FOOT;
+        } else {
+            return TYPE_NORMAL;
         }
-        return TYPE_FOOT;
     }
 
     @Override
     public int getItemCount() {
-        return mAdapter.getItemCount() + 2;
+        return mAdapter.getItemCount() + 1;
     }
 
 

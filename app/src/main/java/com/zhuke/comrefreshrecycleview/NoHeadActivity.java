@@ -1,40 +1,46 @@
 package com.zhuke.comrefreshrecycleview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private RefreshRecyclerView mRecyclerView;
-    private List<String> dataList = new ArrayList<>();
+/**
+ * Created by 15653 on 2018/1/29.
+ */
+
+public class NoHeadActivity extends AppCompatActivity {
+    @BindView(R.id.no_head)
+    NoHeadRecycleView mNoHead;
     private BaseAdapter<String> loadMoreAdapter;
-    private LoadMoreWrapper mWrapper;
-
+    private List<String> dataList = new ArrayList<>();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setContentView(R.layout.no_head_reclcleview);
+        ButterKnife.bind(this);
         init();
     }
 
-    private void init() {
-        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycle);
+  private void init() {
         // 模拟获取数据
         getData();
 
         loadMoreAdapter = new BaseAdapter<String>(this,dataList);
 //        mWrapper = new LoadMoreWrapper(loadMoreAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(loadMoreAdapter);
-        mRecyclerView.setOnLoadMoreListener(new RefreshRecyclerView.OnLoadMoreListener() {
+      mNoHead.setLayoutManager(new LinearLayoutManager(this));
+      mNoHead.setAdapter(loadMoreAdapter);
+      mNoHead.setOnLoadMoreListener(new RefreshRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 mRecyclerView.setLoadMoreState(mRecyclerView.LOADING);

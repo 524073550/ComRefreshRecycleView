@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="isAutoPlay" format="boolean"/>
+    <declare-styleable name="BannerView" >
+        <attr name="isAutoPlay"/>
+    </declare-styleable>
+</resources>
