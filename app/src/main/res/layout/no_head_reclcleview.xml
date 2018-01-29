@@ -3,9 +3,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <com.zhuke.comrefreshrecycleview.NoHeadRecycleView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/normal_srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.zhuke.comrefreshrecycleview.NoHead.NoHeadRecycleView
         android:id="@+id/no_head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.zhuke.comrefreshrecycleview;
+package com.zhuke.comrefreshrecycleview.NoHead;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -11,6 +11,12 @@ import android.util.AttributeSet;
  */
 
 public class NoHeadRecycleView extends RecyclerView {
+    // 正在加载
+    public final int LOADING = 1;
+    // 加载完成
+    public final int LOADING_COMPLETE = 2;
+    // 加载到底
+    public final int LOADING_END = 3;
     public NoHeadRecycleView(Context context) {
         this(context,null);
     }
@@ -29,6 +35,9 @@ public class NoHeadRecycleView extends RecyclerView {
         super.setAdapter(adapter);
     }
 
+    public void setLoadMoreState(int state){
+        ((XrWrapperAdapter) getAdapter()).setLoadState(state);
+    }
     //用来标记是否正在向上滑动
     private boolean isSlidingUpward = false;
 

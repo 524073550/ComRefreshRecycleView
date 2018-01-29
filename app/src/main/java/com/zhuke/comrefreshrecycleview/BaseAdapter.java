@@ -41,6 +41,12 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mStrings.size() == 0 ? 0 : mStrings.size();
     }
 
+    public void upData(List<T> data) {
+        if (mStrings!= null){
+            mStrings.addAll(0,data);
+        }
+    }
+
     public class NormalHolder extends RecyclerView.ViewHolder {
 
         private final TextView mTextView;

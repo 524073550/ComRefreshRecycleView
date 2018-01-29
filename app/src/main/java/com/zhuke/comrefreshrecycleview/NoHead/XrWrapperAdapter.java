@@ -1,4 +1,4 @@
-package com.zhuke.comrefreshrecycleview;
+package com.zhuke.comrefreshrecycleview.NoHead;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.zhuke.comrefreshrecycleview.R;
 
 /**
  * Created by 15653 on 2018/1/23.
@@ -73,7 +75,7 @@ public class XrWrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mAdapter.getItemCount()-1) {
+        if (position == mAdapter.getItemCount()) {
             return TYPE_FOOT;
         } else {
             return TYPE_NORMAL;

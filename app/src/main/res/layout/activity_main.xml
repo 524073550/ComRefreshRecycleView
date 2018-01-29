@@ -5,12 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhuke.comrefreshrecycleview.MainActivity">
+    tools:context="com.zhuke.comrefreshrecycleview.NoHead.MainActivity">
 
 
-    <com.zhuke.comrefreshrecycleview.test.XRefreshRecyclerView
-        android:id="@+id/recycle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+   <Button
+       android:id="@+id/normal"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="系统默认的下拉"
+       android:layout_margin="8dp"/>
+
 
 </android.support.constraint.ConstraintLayout>
